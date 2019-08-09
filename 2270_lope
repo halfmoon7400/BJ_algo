@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[]args){
+        Scanner sc = new Scanner(System.in);
+        int input = sc.nextInt();
+        int [] arr = new int[input];
+        for (int i=0; i< input; i++){
+            arr[i]= sc.nextInt();
+        }
+
+        new Sort().sort(arr,0, arr.length-1);
+        int max = 0;
+        for (int i=0; i< input; i++){
+            if (max < (arr[i] * (i+1)) ){
+                max =arr[i] * (i+1);
+            }
+        }//for
+        System.out.println(max);
+    }
+}
+
+class Sort{
+    public void sort (int ar[] , int left, int right){
+        int l = left;
+        int r = right;
+        int pivot = ar[(l+r)/2];
+        do{
+            while (ar[l]> pivot) l++;
+            while (ar[r]< pivot) r--;
+            if (l<=r){
+                int tmp = ar[l];
+                ar[l]=ar[r];
+                ar[r]=tmp;
+                l++;
+                r--;
+            }
+
+        } while (l<=r);
+        if (left <r) sort (ar, left, r);
+        if (right >l ) sort(ar, l, right);
+    }
+}
