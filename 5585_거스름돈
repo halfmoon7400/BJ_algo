@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class Main {
+        public static void main(String[]args){
+            Scanner sc = new Scanner(System.in);
+            int price ,  pivot, count;
+            price = 1000- sc.nextInt();
+            pivot = 500;
+            count = 0;
+            while(price>0){
+                count += price / pivot;
+                price  %= pivot;
+                if (String.valueOf(pivot).charAt(0)=='5' ){
+                    pivot /= 5;
+                }
+                else {
+                    pivot /= 2;
+                }
+            }//while
+            System.out.println(count);
+        }
+}
