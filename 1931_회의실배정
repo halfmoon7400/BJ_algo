@@ -1,0 +1,43 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+public class Main {
+    public static void main(String[]args) {
+        Scanner sc = new Scanner(System.in);
+        int inputCount = sc.nextInt();
+        ArrayList<Pair> ar = new ArrayList<Pair>();
+        for (int i = 0; i < inputCount; i++) {
+            ar.add(new Pair(sc.nextInt(), sc.nextInt()));
+        }//input 
+        Collections.sort(ar, new Pair() );  // 정렬대상인 ArrayList, 와 객체의 비교compare 메소드를 꺼내쓸 인스턴스 하나 클래스에 Comparator implements할떄
+        
+        int result , prv;
+        result = prv = 0;
+        for (Pair ele : ar){
+            if (ele.start >= prv){
+                result++;
+                prv = ele.ed;
+                
+            }//if
+        }//for
+        System.out.println(result);
+
+    }//Main
+}
+
+
+class Pair implements Comparator<Pair>{
+    int start, ed; //start
+    Pair(){
+        this.start=this.ed=0;
+    }
+    Pair(int a, int b){ this.start = a; this.ed=b ;}
+
+    public int compare( Pair n1, Pair n2){
+        if (n1.ed == n2.ed){return Integer.compare(n1.start, n2.start); }
+        return Integer.compare(n1.ed, n2.ed);
+        // 만일 두 비교대상 객체의 ed가 동일하면 숫자로 두객체의 시작시간을 비교한 결과값을 리턴
+        // 아니라면 두객체의 ed 시간을 비교해
+    }
+}
