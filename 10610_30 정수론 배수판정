@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[]args){
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next();
+        Sort tool = new Sort();
+        int arr[]=new int [input.length()];
+        int sum=0;
+        for (int i=0; i< arr.length; i++){
+            sum+= arr[i]=Integer.parseInt(input.charAt(i)+"") ;
+        }
+        if (sum %3==0 && input.contains("0") ){
+            tool.sort(arr,0,arr.length-1);
+            for (int val : arr){
+                System.out.print(val);
+            }
+            System.out.println();
+        }
+        else {
+            System.out.println("-1");
+        }
+    }
+}
+class Sort {
+    public void sort(int []arr, int left , int right){
+        int l=left;
+        int r=right;
+        int pivot=arr[(l+r)/2];
+        do{
+            while(arr[l]>pivot)l++;  // desc 를 위해 l가 큰값이면 냅둠       오름차순 하려면 < 로 변경
+            while(arr[r]<pivot)r--;  // 마찬가지로 r이 pivot보다 작으면 냅둠  오름차순 하려면 >로변경
+            if (l<=r){
+                int tmp=arr[l];
+                arr[l]=arr[r];
+                arr[r]=tmp;
+                l++;
+                r--;
+            }
+        }while (l<=r);
+        if (left <r){ sort(arr, left, r);}
+        if (right>l){ sort(arr,l, right);}
+
+    }
+
+}
+
+
+
