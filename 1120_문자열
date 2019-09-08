@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[]args){
+        Scanner sc = new Scanner(System.in);
+        String [][] arr = new String[2][];
+        for (int i=0; i<2;i++){
+            arr[i]= sc.next().split("");
+        }
+        int min =99999;
+        for (int i=0; i<arr[1].length-arr[0].length+1; i++){  // arr[1] B
+            int tmp=0;
+            for (int j=0; j<arr[0].length; j++){ // arr[0] A
+                //tmp += ! arr[1][j+i].equals(arr[0][j])  ? 1:0;
+                //tmp += arr[1][j+i].charAt(0) != arr[0][j].charAt(0) ? 1:0;  
+                //equals를 이용하여서 판별하거나 charAt(n)을 이용해서 !=로 판별
+                tmp += ! arr[1][j+i].equals(arr[0][j])  ? 1:0;
+            }
+            min = min > tmp ? tmp : min;
+        }//for _out
+        System.out.println(min);
+    }
+}
+//adaabc  <-  arr[0]
+//aababbc <-  arr[1]   arr[1]에 arr[0]을 위치별로 대입해보며 다른것이 최소일 때의 개수를 구하는 문제
+// arr[0]은 arr[1]보다 항상 적으며 arr[0]의 빈자리는 arr[1]의 수를 자리수에 맞게 대입하면 동일해진다.
+
+//   aababbc
+//   adaabc   3
+//    adaabc  2
