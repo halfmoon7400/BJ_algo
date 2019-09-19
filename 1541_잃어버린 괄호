@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[]args){
+        Scanner sc = new Scanner(System.in);
+        String [] str = sc.next().split("-");
+        int [] arr = new int [str.length];
+        int sum=0;
+        for (int i=0; i< arr.length; i++) {
+            for (String val : str[i].split("\\+")) {
+                sum += Integer.parseInt(val);
+            }
+            arr[i]=sum;
+            sum=0;
+        }//for
+        sum+=arr[0];
+        for (int i=1; i<arr.length; i++){
+            sum-=arr[i];
+        }
+        System.out.println(sum);
+
+    }   //main()
+}//class Main
+
+/*
+  값이 최소로 되게 하기 위해선 뺄 값이 최대이면 된다. 
+  마이너스 구간으 먼저 split 하고
+  그 뒤 남겨진 플러스들 끼리 sum 하고
+  가장 첫번
+
+
+*/
