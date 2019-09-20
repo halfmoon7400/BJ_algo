@@ -1,0 +1,52 @@
+mport java.util.Scanner;
+import java.util.Comparator;
+//import java.util.Collections; <- 정렬할 대상이 ArrayList 일 때 는 함께 사용가능 (이전 회의시간 배정 문제) int[][] 같은 경우 Arrys로 해결
+import java.util.Arrays;
+public class Main {
+    public static void main(String[]args){
+        //신입사원 문제
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        int [][]arr ;
+
+        for (int i=0; i< t; i++){
+            int ans=0;
+            int pivot= 0;
+            int count = sc.nextInt();
+            arr= new int [count][2];
+            for (int j=0; j<count; j++){
+                arr[j][0]=sc.nextInt();
+                arr[j][1]=sc.nextInt();
+            }//input
+
+
+            Arrays.sort(arr , new Comparator <int []>() {
+                @Override
+                 // 이 문제에서는 동점자가 없다고 했으니 n1[0] n2[0] 가 같을 때, n1[1] n2[1]을 비교하는 if문을 안넣어도 된다.
+                public int compare(int[] n1, int[] n2){
+                    if (n1[0] == n2[0]) {return Integer.compare(n1[1], n2[1]);}
+                    return Integer.compare(n1[0],n2[0]);
+                }
+            });
+            //익명클래스를 이용한 정렬
+            //
+
+            //검증시작
+            ans++;
+            pivot = arr[0][1];
+            for (int j=1; j<count ; j++){
+                if (arr[j][1] <pivot) {
+                    ans++;
+                    pivot = arr[j][1];
+                }
+            }// for check outter
+            System.out.println(ans);
+             /*
+             우수한 사원은 서류와 면접 모두 다른 사원에게 뒤쳐지지 않는다.
+             
+             */
+        }//for test_case
+
+
+    }   //main()
+}//class Main
