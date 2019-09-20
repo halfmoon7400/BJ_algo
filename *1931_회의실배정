@@ -24,7 +24,7 @@ public class Main {
         System.out.println(result);
 
     }//Main
-}
+} 
 
 
 class Pair implements Comparator<Pair>{
