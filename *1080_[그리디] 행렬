@@ -1,0 +1,92 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String []args){
+        Scanner sc =new Scanner(System.in);
+        int N,M,sum,answer;
+        N=sc.nextInt();
+        M=sc.nextInt(); //
+
+        sc.nextLine();
+        boolean [][][] C = new boolean [2][N][M];
+
+        for (int i=0; i<2; i++){
+            for (int j=0; j< N;j++){
+                int k=0;
+                for (String val :  sc.next().split("") ){
+                    boolean tmp = ( val.equals("1") )? true:false;
+                    C[i][j][k] = tmp;
+                    k++;
+                }
+            }
+        }//input
+
+        if ( M <3 || N<3) {
+            sum=0;
+        }
+        else {
+            answer = sum = 0;
+            for (int i = 0; i < N - 2; i++) {
+                boolean tmp = false;
+                for (int j = 0; j < M - 2; j++) {
+                    if (C[0][i][j] != C[1][i][j]) {
+                        sum += change(C, i, j);
+           
+                    }
+                }
+            }//solving
+        }
+
+        answer = (check(C) )? sum : -1;
+        System.out.println(answer);
+
+    }//main
+
+    static int change (boolean [][][] arr , int row, int col){
+        for (int i=0; i<3; i++){
+            for (int j=0; j<3; j++){
+                    arr[0][i+row][j+col]= !arr[0][i+row][j+col];
+            }
+        }
+        return 1;
+    }//run change 3*3
+
+    static boolean check(boolean [][][] arr){
+        for (int i=0;i< arr[0].length; i++){
+            for (int j=0; j<arr[0][0].length; j++){
+                if (arr[0][i][j] != arr[1][i][j]) return false;
+            }
+        }
+        return true;
+    }
+
+//    static void print(boolean [][][] arr ){
+//        for (int i=0; i<2 ; i++){
+//            System.out.println("set "+ i);
+//            for (int j=0; j< arr[0].length; j++){
+//                for (int k=0; k< arr[0][0].length; k++){
+//                    int tmp=  (arr[i][j][k])? 1:0;
+//                    System.out.print( tmp  +" ");
+//                }
+//                System.out.println();
+//            }
+//        }
+//        System.out.println();
+//    }
+}//class
+
+
+/*
+0과 1로만 이루어진 행렬 A와 행렬 B가 있다. 이때, 행렬 A를 행렬 B로 바꾸는데 필요한 연산의 횟수의 최솟값을 구하는 프로그램을 작성하시오.
+
+행렬을 변환하는 연산은 어떤 3*3크기의 부분 행렬에 있는 모든 원소를 뒤집는 것이다. (0 -> 1, 1 -> 0)
+
+입력
+첫째 줄에 행렬의 크기 N M이 주어진다. N과 M은 50보다 작거나 같은 자연수이다. 둘째 줄부터 N개의 줄에는 행렬 A가 주어지고, 그 다음줄부터 N개의 줄에는 행렬 B가 주어진다.
+
+출력
+첫째 줄에 문제의 정답을 출력한다. 만약 A를 B로 바꿀 수 없다면 -1을 출력한다.
+
+
+*/
+
